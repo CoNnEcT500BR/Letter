@@ -266,6 +266,7 @@ body.dim {
 
 .letter {
   position: absolute;
+  text-align: justify;
   bottom: 0px;
   left: 50%;
   width: 92%;
@@ -284,7 +285,6 @@ body.dim {
     box-shadow 1.2s ease;
   animation: none;
   z-index: 6;
-  text-align: justify;
 }
 
 .letter.closing {
@@ -434,3 +434,4 @@ body.dim {
   }
 
 }
+
