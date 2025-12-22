@@ -284,6 +284,7 @@ body.dim {
     box-shadow 1.2s ease;
   animation: none;
   z-index: 6;
+  text-align: justify;
 }
 
 .letter.closing {
@@ -431,4 +432,5 @@ body.dim {
     opacity: 0.6;
     animation-duration: 45s;
   }
+
 }
