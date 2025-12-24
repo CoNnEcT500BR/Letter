@@ -1,3 +1,5 @@
+/* ===== Reset & Base ===== */
+
 * {
   box-sizing: border-box;
   font-family: 'Georgia', serif;
@@ -10,46 +12,43 @@ html, body {
 
 body {
   margin: 0;
-  height: 100vh;
-  background: #2b0b10;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  background: #2b0b10;
+  transition: background-color 1.2s ease;
 }
 
 body.dim {
   background-color: #0e0b10;
-  transition: background-color 1.2s ease;
 }
 
-/* Background */
+/* ===== Background Layers ===== */
 
-.bg-layer.base {
+.bg-layer {
   position: fixed;
   inset: 0;
-  background:
-    radial-gradient(circle at top, #5a0f1c, #1b0509 70%);
+}
+
+.bg-layer.base {
+  background: radial-gradient(circle at top, #5a0f1c, #1b0509 70%);
   z-index: -4;
 }
 
 .bg-layer.texture {
-  position: fixed;
-  inset: 0;
-  background-image:
-    url("https://www.transparenttextures.com/patterns/fibers.png");
+  background-image: url("https://www.transparenttextures.com/patterns/fibers.png");
   opacity: 0.08;
   z-index: -3;
 }
 
 .bg-layer.glow {
-  position: fixed;
   inset: -50%;
-  background:
-    radial-gradient(circle at center, rgba(255,180,180,0.15), transparent 60%);
+  background: radial-gradient(circle at center, rgba(255,180,180,0.15), transparent 60%);
   animation: glowMove 30s linear infinite;
   z-index: -2;
 }
+
+/* ===== Memories ===== */
 
 .memories {
   position: fixed;
@@ -60,16 +59,13 @@ body.dim {
 
 .memory {
   position: absolute;
-  width: 4px;
-  height: 4px;
   background: rgba(255, 215, 160, 0.7);
   border-radius: 50%;
   box-shadow: 0 0 8px rgba(255, 215, 160, 0.6);
-  animation: memoryFlicker cubic-bezier(0.6, 0.2, 0.4, 1) infinite;
-  animation-fill-mode: both;
+  animation: memoryFlicker infinite both;
 }
 
-/* Envelope */
+/* ===== Envelope ===== */
 
 .envelope {
   position: relative;
@@ -87,17 +83,18 @@ body.dim {
 
 .envelope-front,
 .envelope-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
   background-image:
     linear-gradient(145deg, #8b1e2d, #741726),
     url('https://www.transparenttextures.com/patterns/paper-fibers.png');
 }
 
 .envelope-back {
-  position: absolute;
   width: 100%;
   height: 100%;
   background: linear-gradient(145deg, #8b1e2d, #741726);
-  border-radius: 10px;
   box-shadow:
     inset 0 0 30px rgba(0,0,0,0.2),
     0 20px 40px rgba(0,0,0,0.3);
@@ -105,11 +102,9 @@ body.dim {
 }
 
 .envelope-front {
-  position: absolute;
   width: 100%;
   height: 100%;
   background: #8b1e2d;
-  border-radius: 10px;
   overflow: hidden;
   z-index: 4;
 }
@@ -195,7 +190,7 @@ body.dim {
   opacity: 1;
 }
 
-/* Flap */
+/* ===== Flap ===== */
 
 .flap {
   position: absolute;
@@ -205,24 +200,21 @@ body.dim {
   background: linear-gradient(145deg, #9a2233, #7a1726);
   clip-path: polygon(0 0, 100% 0, 50% 100%);
   transform-origin: top;
-  transform: rotateX(0deg);
   transition: transform 1s ease;
   box-shadow: inset 0 -5px 10px rgba(0,0,0,0.2);
-  z-index: 5;
   backface-visibility: hidden;
+  z-index: 5;
 }
 
-/* Selo */
-
-.initial-seal {
+.seal {
   position: absolute;
   top: 50%;
   left: 50%;
   width: 64px;
   height: 64px;
-  background: radial-gradient(circle at top left, #f0d58c, #b9964b);
   border-radius: 50%;
   transform: translate(-50%, -50%);
+  background: radial-gradient(circle at top left, #f0d58c, #b9964b);
   box-shadow:
     inset 0 0 8px rgba(255,255,255,0.4),
     0 6px 12px rgba(0,0,0,0.4);
@@ -231,67 +223,47 @@ body.dim {
   justify-content: center;
   font-size: 26px;
   color: #6b4c1e;
-  font-family: 'Georgia', serif;
   animation: sealPulse 4s infinite ease-in-out;
   pointer-events: none;
-  z-index: 6;
 }
 
+/* Variants */
+.initial-seal { z-index: 6; }
 .final-seal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: radial-gradient(circle at top left, #f0d58c, #b9964b);
-  box-shadow:
-    inset 0 0 8px rgba(255,255,255,0.4),
-    0 6px 18px rgba(0,0,0,.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
-  color: #6b4c1e;
+  z-index: 7;
   transform: translate(-50%, -50%) scale(0);
   opacity: 0;
-  z-index: 7;
 }
 
 .final-seal.animate {
   animation: sealFinal 0.7s ease forwards;
 }
 
-/* Carta */
+/* ===== Letter ===== */
 
 .letter {
   position: absolute;
-  text-align: justify;
-  bottom: 0px;
+  bottom: 0;
   left: 50%;
   width: 92%;
   height: 260px;
-  background-image:
-    linear-gradient(#fffdf8, #f6efe5),
-    url('https://www.transparenttextures.com/patterns/paper.png');
   transform: translateX(-50%) translateY(100%);
   opacity: 0;
   pointer-events: none;
   border-radius: 6px;
+  background-image:
+    linear-gradient(#fffdf8, #f6efe5),
+    url('https://www.transparenttextures.com/patterns/paper.png');
   box-shadow: 0 10px 20px rgba(0,0,0,0.25);
-  transition:
-    transform 1.2s ease,
-    opacity 0.6s ease,
-    box-shadow 1.2s ease;
-  animation: none;
+  transition: transform 1.2s ease, opacity 0.6s ease;
   z-index: 6;
 }
 
 .letter.closing {
   transform: translateX(-50%) scale(0.98);
   opacity: 0.6;
-  transition: opacity 0.6s ease, transform 0.6s ease;
 }
+
 
 .letter.closing,
 .envelope.closed-final .letter {
@@ -304,20 +276,16 @@ body.dim {
   position: absolute;
 }
 
-/* Páginas */
+/* ===== Pages ===== */
 
 .page-flow {
   position: absolute;
   inset: 0;
   padding: 24px;
-  font-family: 'Georgia', serif;
   opacity: 0;
   transform: translateX(10px) rotateY(2deg);
-  transition:
-    opacity 0.6s ease,
-    transform 0.6s ease;
+  transition: opacity 0.6s ease, transform 0.6s ease;
   pointer-events: none;
-  z-index: 1;
 }
 
 .page-flow.active {
@@ -331,26 +299,18 @@ body.dim {
   transform: translateX(-10px) rotateY(-2deg);
 }
 
-
-/* Segredo */
+/* ===== Secret ===== */
 
 .secret-message {
   position: fixed;
   left: 50%;
   top: calc(50% + 160px);
   transform: translateX(-50%);
-  font-family: 'Georgia', serif;
   font-size: 18px;
-  letter-spacing: 0.4px;
   color: rgba(255, 215, 200, 0.85);
   opacity: 0;
   filter: blur(6px);
-  pointer-events: none;
-  user-select: none;
-  transition:
-    opacity 1.2s ease,
-    filter 1.2s ease;
-  z-index: 10;
+  transition: opacity 1.2s ease, filter 1.2s ease;
 }
 
 .secret-message.visible {
@@ -432,6 +392,4 @@ body.dim {
     opacity: 0.6;
     animation-duration: 45s;
   }
-
 }
-

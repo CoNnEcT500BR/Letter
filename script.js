@@ -3,7 +3,7 @@ document.body.classList.add('dim');
 const envelope = document.getElementById('envelope');
 const pages = document.querySelectorAll('.page-flow');
 const memoryContainer = document.getElementById('memories');
-const MEMORY_COUNT = 40;
+const MEMORY_COUNT = 80;
 
 let currentPage = 0;
 let opened = false;
@@ -27,7 +27,7 @@ for (let i = 0; i < MEMORY_COUNT; i++) {
   m.style.animationDelay = `${delay}s`;
   m.style.animationTimingFunction =
   Math.random() > 0.5
-    ? 'cubic-bezier(0.4, 0, 0.2, 1)'
+    ? 'cubic-bezier(0.6, 0.2, 0.4, 1)'
     : 'ease-in-out';
 
   memoryContainer.appendChild(m);
@@ -125,11 +125,11 @@ function endLetter() {
     if (oldSeal) oldSeal.remove();
 
     const finalSeal = document.createElement('div');
-    finalSeal.classList.add('final-seal', 'animate');
+    finalSeal.classList.add('seal', 'final-seal', 'animate');
     finalSeal.innerHTML = '<span>♥</span>';
     envelope.appendChild(finalSeal);
   }, 900);
-
+  
   setTimeout(() => {
     const secret = document.getElementById('secretMessage');
     letter.classList.add('fade-out');
